@@ -1,0 +1,170 @@
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  } .stretch-card > .card {
+width: 100%;
+min-width: 100%;
+}
+
+body {
+background-color: #f9f9fa
+}
+
+.flex {
+-webkit-box-flex: 1;
+-ms-flex: 1 1 auto;
+flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+.padding {
+padding: 1.5rem
+}
+}
+
+@media (max-width:767.98px) {
+.padding {
+padding: 1rem
+}
+}
+
+.padding {
+padding: 3rem
+}
+
+.card {
+box-shadow: none;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+-ms-box-shadow: none
+}
+
+
+.card {
+position: relative;
+display: flex;
+flex-direction: column;
+min-width: 0;
+word-wrap: break-word;
+background-color: #fff;
+background-clip: border-box;
+border: 1px solid #3da5f;
+border-radius: 0;
+}
+
+.card .card-body {
+padding: 1.25rem 1.75rem;
+}
+
+.card .card-title {
+color: #000000;
+margin-bottom: 0.625rem;
+text-transform: capitalize;
+font-size: 0.875rem;
+font-weight: 500;
+}
+
+.card .card-description {
+margin-bottom: .875rem;
+font-weight: 400;
+color: #76838f;
+}
+
+.form-group label {
+font-size: 0.875rem;
+line-height: 1.4rem;
+vertical-align: top;
+margin-bottom: .5rem;
+}
+
+.form-control {
+border: 1px solid #f3f3f3;
+font-weight: 400;
+font-size: 0.875rem;
+}
+
+
+
+</style>
+  <style type="text/css">span.im-caret {
+-webkit-animation: 1s blink step-end infinite;
+animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+from, to {
+border-right-color: black;
+}
+50% {
+border-right-color: transparent;
+}
+}
+
+@-webkit-keyframes blink {
+from, to {
+border-right-color: black;
+}
+50% {
+border-right-color: transparent;
+}
+}
+
+span.im-static {
+color: grey;
+}
+
+div.im-colormask {
+display: inline-block;
+border-style: inset;
+border-width: 2px;
+-webkit-appearance: textfield;
+-moz-appearance: textfield;
+appearance: textfield;
+}
+
+div.im-colormask > input {
+position: absolute;
+display: inline-block;
+background-color: transparent;
+color: transparent;
+-webkit-appearance: caret;
+-moz-appearance: caret;
+appearance: caret;
+border-style: none;
+left: 0; /*calculated*/
+}
+
+div.im-colormask > input:focus {
+outline: none;
+}
+
+div.im-colormask > input::-moz-selection{
+background: none;
+}
+
+div.im-colormask > input::selection{
+background: none;
+}
+div.im-colormask > input::-moz-selection{
+background: none;
+}
+
+div.im-colormask > div {
+color: black;
+display: inline-block;
+width: 100px; /*calculated*/
+}

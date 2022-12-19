@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Dodocs - Serviços</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<html>
+<body classname="snippet-body">
+
+
+<body>
+
+<!-- MENU -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Cliente</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{url_for('list_cliente')}}">Clientes</a></li>
+              <li><a class="dropdown-item" href="{{url_for('cliente')}}">Cadastro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Parceiro</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Link</a></li>
+              <li><a class="dropdown-item" href="#">Another link</a></li>
+              <li><a class="dropdown-item" href="#">A third link</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Serviço</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{url_for('cad_servico')}}">Cadastrar</a></li>
+              <li><a class="dropdown-item" href="{{url_for('list_servico')}}">Listar</a></li>
+              <li><a class="dropdown-item" href="#">A third link</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- END MENU -->
+
+
+
+
+<br>
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-left">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+          <!--form mask starts-->
+          <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Serviços</h4>
+
+
+   <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Serviço</th>
+          <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for servico in servicos %}
+                <tr>
+                    <td>{{ servico.servico }}</td>
+                    <td><button type="button" class="btn btn-primary btn-sm">Small</button>
+                    <button type="button" class="btn btn-primary btn-sm">Small</button>
+                    <button type="button" class="btn btn-primary btn-sm">Small</button></td>
+                </tr>
+                {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

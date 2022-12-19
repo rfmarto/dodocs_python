@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-left">
+        <div class="col-lg-10 grid-margin stretch-card">
+
+          <!--form mask starts-->
+          <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Clientes</h4>
+   <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Razao</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+
+            {% for cliente in empresas %}
+                <tr>
+                    <td>{{ cliente.razao }}</td>
+                    <td>
+                        <a href="{{ url_for('contato_by_cli', id=cliente.cdEmpresa) }}">
+                        <button type="button" class="btn btn-primary btn-sm">Contatos</button></a>
+                        <a href="{{ url_for('evento_by_cli', id=cliente.cdEmpresa) }}">
+                            <button type="button" class="btn btn-primary btn-sm">Eventos</button></a>
+                        <a href="{{ url_for('upd_cliente', id=cliente.cdEmpresa) }}">
+                            <button type="button" class="btn btn-primary btn-sm">Editar</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

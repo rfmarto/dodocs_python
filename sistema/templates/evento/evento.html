@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-left">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+          <!--form mask starts-->
+          <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Eventos</h4>
+              <div class="row">
+                  <div class="col-sm-3"><b>Data</b></div>
+                <div class="col-sm-5"><b>Evento</b></div>
+                <div class="col-sm-4"><b>Ações</b></div>
+              </div>
+              {% for evento in eventos %}
+              <div class="row">
+                <div class="col-sm-3">{{evento.dtIniRel}}</div>
+                <div class="col-sm-5">{{evento.nmEvento}}</div>
+                <div class="col-sm-4">
+                    <a href="{{ url_for('contato_by_cli', cdEvento=evento.cdEvento) }}">
+                        <button type="button" class="btn btn-primary btn-sm">Contatos</button></a>
+                        <a href="{{ url_for('evento_by_cli' ) }}">
+                            <button type="button" class="btn btn-primary btn-sm">Eventos</button></a>
+                        <a href="{{ url_for('evento_by_cli') }}">
+                            <button type="button" class="btn btn-primary btn-sm">Editar</button></a></div>
+              </div>
+
+
+
+                {% endfor %}
+
+
+
+{% endblock %}

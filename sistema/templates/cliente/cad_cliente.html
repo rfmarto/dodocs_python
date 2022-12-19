@@ -1,0 +1,105 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-left">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+          <!--form mask starts-->
+          <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Cadastro de Clientes</h4>
+            <p class="card-description">Use preferencialmente o CNPJ</p>
+
+            <form action="{{url_for('add_cliente')}}" method="post">
+            <form class="forms-sample">
+
+              <div class="form-group row">
+                <div class="col">
+                  <label for="cnpj">CNPJ</label>
+                  <input id="cnpj" name="cnpj" class="form-control" data-inputmask="'alias': '99.999.999/9999-99'">
+                </div>
+                <div class="col">
+                  <label for="codCli">Cod Cliente</label>
+                  <input class="form-control" id="codCli" name="CodCli" disabled >
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col">
+                  <label for="nome">Razão Social</label>
+                  <input class="form-control" id="nome" name="nome">
+                </div>
+                <div class="col">
+                  <label for="fantasia">Nome Fantasia</label>
+                  <input class="form-control" id="fantasia" name="fantasia">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-lg-3">
+                  <label for="abertura">Data Abertura</label>
+                  <input class="form-control" id="abertura" name="abertura" >
+                </div>
+
+                <div class="col-lg-3">
+                  <label for="telefone">Telefone</label>
+                  <input class="form-control" id="telefone" name="telefone" >
+                </div>
+                <div class="col">
+                  <label for="email">E-mail</label>
+                  <input class="form-control" id="email" name="email" type="email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-2">
+                  <label for="code">Cod. Atividade </label>
+                  <input class="form-control" id="code" name="code">
+                </div>
+                <div class="col">
+                  <label for="atividade_principal">Atividade Principal</label>
+                  <input class="form-control" id="atividade_principal" name="atividade_principal">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="logradouro">Logradouro</label>
+                  <input class="form-control"  id="logradouro" name="logradouro">
+                </div>
+                <div class="col-lg-2">
+                  <label for="numero">Numero</label>
+                  <input class="form-control"  id="numero" name="numero">
+                </div>
+                <div class="col-lg-3">
+                  <label for="complemento">Complemento</label>
+                  <input class="form-control"  id="complemento" name="complemento">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-3">
+                  <label for="bairro">Bairro</label>
+                  <input class="form-control"  id="bairro" name="bairro">
+                </div>
+                <div class="col-lg-3">
+                <label for="municipio">Municipio</label>
+                <input class="form-control" type="text" id="municipio" name="municipio">
+                </div>
+                <div class="col-lg-1">
+                  <label for="uf">UF</label>
+                  <input class="form-control"  id="uf" name="uf">
+                </div>
+                <div class="col-lg-3">
+                  <label for="cep">CEP</label>
+                  <input class="form-control"  id="cep" name="cep">
+                </div>
+                <div class="col-sm-2">
+                  <input type="submit" value="Próximo">
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

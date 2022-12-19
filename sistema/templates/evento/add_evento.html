@@ -1,0 +1,197 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-left">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+          <!--form mask starts-->
+          <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Fluxo de Cadstrato de Evento</h4>
+          <form method="post">
+            <form class="forms-sample">
+              <div class="card">
+                <div class="card-body">
+<!--###############################REALIZADOR################################################-->
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="cnpjRel">CNPJ do Realizador</label>
+                            <input id="cnpjRel" name="cnpjRel" class="form-control" data-inputmask="'alias': '99.999.999/9999-99'" {%if rel%} value="{{rel.cnpj}}" {%endif%}>
+                        </div>
+                        <div class="col">
+                            <label for="nomeRel">Razão Social</label>
+                            <input class="form-control" id="nomeRel" name="nomeRel" disabled {%if rel%} value="{{rel.razao}}" {%endif%}>
+                        </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="form-group row">
+                                    <div class="col">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                        {% endwith %}
+                    </div>
+                    </br>
+<!--###############################ORGANIZADOR################################################-->
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="cnpjOrg">CNPJ do Organizador</label>
+                            <input id="cnpjOrg" name="cnpjOrg" class="form-control" data-inputmask="'alias': '99.999.999/9999-99'" {%if org%} value="{{org.cnpj}}" {%endif%}>
+                        </div>
+                        <div class="col">
+                            <label for="nomeOrg">Razão Social</label>
+                            <input class="form-control" id="nomeOrg" name="nomeOrg" disabled {%if org%} value="{{org.razao}}" {%endif%}>
+                        </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="form-group row">
+                                    <div class="col">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    </br>
+<!--###############################LOCAL DO EVENTO################################################-->
+                   <div class="form-group row">
+                        <div class="col">
+                            <label for="cnpjLoc">CNPJ do Local do Evento</label>
+                            <input id="cnpjLoc" name="cnpjLoc" class="form-control" data-inputmask="'alias': '99.999.999/9999-99'" {%if loc%} value="{{loc.cnpj}}" {%endif%}>
+                        </div>
+                        <div class="col">
+                            <label for="nomeLocal">Razão Social</label>
+                            <input class="form-control" id="nomeLocal" name="nomeLocal"disabled {%if loc%} value="{{loc.razao}}" {%endif%}>
+                        </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="form-group row">
+                                    <div class="col">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    </br>
+<!--###############################Dados do evento################################################-->
+                  <div class="form-group row">
+                        <div class="col-sm-8">
+                            <label for="nmEvento">Nome do Evento</label>
+                            <input id="nmEvento" name="nmEvento" class="form-control" {%if nmEvento%} value="{{nmEvento}}" {%endif%}>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="nomeEvento">PAX</label>
+                            <input id="pax" name="pax" class="form-control" {%if pax%} value="{{pax}}" {%endif%}>
+                        </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="form-group row">
+                                    <div class="col">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    </br>
+<!--###############################Datas################################################-->
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="dtIniMont">Inicio da montagem</label>
+                            <input type="datetime-local" id="dtIniMont" name="dtIniMont" class="form-control" {%if dtIniMont%} value="{{dtIniMont}}" {%endif%}>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="dtIniEvento">Inicio do Evento</label>
+                            <input type="datetime-local" id="dtIniRel" name="dtIniRel" class="form-control" {%if dtIniRel%} value="{{dtIniRel}}" {%endif%}>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="dtIniDesmont">Inicio da Desmontagem</label>
+                            <input type="datetime-local" id="dtIniDesmont" name="dtIniDesmont" class="form-control" {%if dtIniDesmont%} value="{{dtIniDesmont}}" {%endif%}>
+                        </div>
+                    </div>
+                    </br>
+                     <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="dtFimMont">Fim da montagem</label>
+                            <input type="datetime-local" id="dtFimMont" name="dtFimMont" class="form-control" {%if dtFimMont%} value="{{dtFimMont}}" {%endif%}>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="dtFimEvento">Fim do Evento</label>
+                            <input type="datetime-local" id="dtFimRel" name="dtFimRel" class="form-control" {%if dtFimRel%} value="{{dtFimRel}}" {%endif%}>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="dtFimDesmont">Fim da Desmontagem</label>
+                            <input type="datetime-local" id="dtFimDesmont" name="dtFimDesmont" class="form-control" {%if dtFimDesmont%} value="{{dtFimDesmont}}" {%endif%}>
+                        </div>
+                    </div>
+</br>
+
+                    <div class="form-group row">
+                      <div class="col">
+                          {% if not validado %}
+                            <input type='submit' value='Validar' onclick='this.form.action="/valida_form";'  />
+                          {% else %}
+                            <input type='submit' value='Cadastrar' onclick='this.form.action="/addEvento";'  />
+                            <input type="hidden" name="cdRel" value="{{rel.cdEmpresa}}">
+                            <input type="hidden" name="cdOrg" value="{{org.cdEmpresa}}">
+                            <input type="hidden" name="cdLoc" value="{{loc.cdEmpresa}}">
+                          {%endif%}
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+            </form>
+
+
+
+
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+
+$(document).ready(function(){
+$(":input").inputmask();
+
+$("#telefone").inputmask({
+mask: '99 9999 9999',
+placeholder: ' ',
+showMaskOnHover: false,
+showMaskOnFocus: false,
+onBeforePaste: function (pastedValue, opts) {
+var processedValue = pastedValue;
+
+return processedValue;
+}
+});
+
+
+
+});
+
+
+  var myLink = document.querySelectorAll('a[href="#"]');
+  myLink.forEach(function(link){
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+    });
+  });
+
+ </script>
+{% endblock %}
