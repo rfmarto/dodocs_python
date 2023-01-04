@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
 from sistema import app, db
-from models import Servico, Empresa, Evento
-from datetime import datetime
+from models import Servico, Empresa, Evento, Finevento
+
 
 
 def dtFormat(dt):
@@ -44,7 +44,11 @@ def menu():
 
 @app.route('/list_evento')
 def list_evento():
-    eventos = Evento.query.order_by(Evento.dtIniRel)
+    sql = 'select  DATE_FORMAT(ev.dtIniRel, "%Y-%m-%d") dtIniRel, '
+    sql = sql +'ev.cdOrganizadora, ev.nmEvento, ep.fantasia, ev.cdEvento '
+    sql = sql +'from domanager.evento ev, domanager.empresa ep '
+    sql = sql +'where ev.cdOrganizadora = ep.cdEmpresa order by dtIniRel'
+    eventos = db.engine.execute(sql)
     return render_template('evento/evento.html', eventos=eventos)
 
 @app.route('/add_evento')
@@ -128,10 +132,74 @@ def addEvento():
 
     return render_template('evento/evento.html')
 
+@app.route('/addProdutor')
+def addProdutor():
+    return render_template('evento/add_produtor.html')
 
 @app.route('/contrato', methods=['POST',])
 def contrato():
     return render_template('documentos/contrato.html')
+
+########################## FINANCEIRO ##############################
+
+@app.route('/financeiro/<int:cdEvento>')
+def financeiro(cdEvento):
+
+    fin = Finevento.query.filter_by(cdEvento=cdEvento).order_by(Finevento.dtLanc)
+
+    sql = 'select sum(valor) as venda from domanager.finevento where cdevento = ' + str(cdEvento) + ' and valor > 0'
+    venda = db.engine.execute(sql)
+    for i in venda:
+        vlVenda = i.venda
+
+    sql = 'select sum(valor) as custo from domanager.finevento where cdevento = ' + str(cdEvento) + ' and valor < 0'
+    custo = db.engine.execute(sql)
+    for i in custo:
+        vlCusto = i.custo
+
+#################################################
+
+
+#################################################
+    sql = 'select ((sum(valor) / 100) * 6) as nf from domanager.finevento where cdevento = ' + str(cdEvento) + ' and valor > 0'
+    nf = db.engine.execute(sql)
+    for i in nf:
+        vlNf = i.nf
+        vlNf = (vlNf*-1)
+
+    res = vlVenda - (vlCusto + vlNf)
+
+
+
+    return render_template('/fin/finEve.html', fin=fin, venda=vlVenda, custo=vlCusto, nf=vlNf, res=res)
+
+
+@app.route('/addLancamento', methods=['POST',])
+def addLancamento():
+    cdEvento = request.form['cdEvento']
+    dt  =  request.form['data']
+    det = request.form['detalhe']
+    vl  = request.form['valor']
+
+    newFinEvento = Finevento(cdEvento=cdEvento, detalhe=det, dtLanc=dt, valor=vl)
+    db.session.add(newFinEvento)
+    db.session.commit()
+
+    fin = Finevento.query.filter_by(cdEvento=cdEvento).order_by(Finevento.dtLanc)
+
+    sql = 'select sum(valor) venda from domanager.finevento where cdevento = '+str(cdEvento)+' and valor > 0'
+    venda = db.engine.execute(sql)
+
+    sql ='select sum(valor) custo from domanager.finevento where cdevento = '+str(cdEvento)+' and valor < 0'
+    custo = db.engine.execute(sql)
+
+    sql = 'select((sum(valor) / 100) * 6) nf from domanager.finevento where cdevento = '+str(cdEvento)+' and valor > 0'
+    nf = db.engine.execute(sql)
+
+    resultado = (venda.venda - custo.custo - nf.nf)
+
+
+    return render_template('/fin/finEve.html', fin=fin, venda=venda, custo=custo, nf=nf, resultado=resultado)
 
 
 ########################## CLIENTE ##############################
@@ -159,7 +227,7 @@ def add_cliente():
     req_abertura = dtFormat(request.form['abertura'])
 
 
-    print(req_abertura)
+
 
     existe = Empresa.query.filter_by(cnpj = req_cnpj).first()
     if existe:

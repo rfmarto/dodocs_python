@@ -77,8 +77,7 @@ class Evento(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
-
-class FinEvento(db.Model):
+class Finevento(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cdEvento = db.Column(db.Integer, nullable=False)
     detalhe = db.Column(db.String(200), nullable=False)

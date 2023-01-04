@@ -1,6 +1,12 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
+<script>
+function setaDadosModal(valor) {
+    document.getElementById('campo').value = valor;
+}
+</script>
+
 <div class="page-content page-container" id="page-content">
     <div class="padding">
       <div class="row container d-flex justify-content-left">
@@ -11,23 +17,61 @@
           <div class="card-body">
             <h4 class="card-title">Eventos</h4>
               <div class="row">
-                  <div class="col-sm-3"><b>Data</b></div>
-                <div class="col-sm-5"><b>Evento</b></div>
-                <div class="col-sm-4"><b>Ações</b></div>
+                  <div class="col-sm-2"><b>Data</b></div>
+                  <div class="col-sm-3"><b>Evento</b></div>
+                  <div class="col-sm-3"><b>Organizadora</b></div>
+                  <div class="col-sm-4"><b>Ações</b></div>
               </div>
               {% for evento in eventos %}
               <div class="row">
-                <div class="col-sm-3">{{evento.dtIniRel}}</div>
-                <div class="col-sm-5">{{evento.nmEvento}}</div>
+                <div class="col-sm-2">{{evento.dtIniRel}}</div>
+                <div class="col-sm-3">{{evento.nmEvento}}</div>
+                <div class="col-sm-3">{{evento.fantasia}}</div>
                 <div class="col-sm-4">
-                    <a href="{{ url_for('contato_by_cli', cdEvento=evento.cdEvento) }}">
-                        <button type="button" class="btn btn-primary btn-sm">Contatos</button></a>
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#myModal" onclick="setaDadosModal("{{evento.cdOrganizadora}}")">
+                        Produtor
+                    </button>
+                    <a href="{{ url_for('financeiro', cdEvento=evento.cdEvento) }}">
+                        <button type="button" class="btn btn-link">Financeiro</button></a>
                         <a href="{{ url_for('evento_by_cli' ) }}">
-                            <button type="button" class="btn btn-primary btn-sm">Eventos</button></a>
+                            <button type="button" class="btn btn-link">Eventos</button></a>
                         <a href="{{ url_for('evento_by_cli') }}">
-                            <button type="button" class="btn btn-primary btn-sm">Editar</button></a></div>
+                            <button type="button" class="btn btn-link">Editar</button></a>
+                </div>
               </div>
 
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <select class="form-select">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
                 {% endfor %}
